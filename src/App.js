@@ -1,6 +1,7 @@
 import axios from "axios";
 import "./App.css";
 import { useEffect, useState } from "react";
+import { Container } from "@mui/material";
 
 function App() {
   // const [word, setWord] = useState("");
@@ -24,7 +25,11 @@ function App() {
     dictionaryApi();
   }, []);
 
-  return <div className="App">dictionmaertgrefvl</div>;
+  return (
+    <div className="App">
+      <Container maxWidth="md">dictionary</Container>
+    </div>
+  );
 }
 
 export default App;
