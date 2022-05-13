@@ -11,8 +11,9 @@ function App() {
   const [word, setWord] = useState("");
   const [meanings, setMeanings] = useState([]);
   const [category, setCategory] = useState("en");
+  const [LightMode, setLightMode] = useState(false);
 
-  const GreenSwitch = styled(Switch)(({ theme }) => ({
+  const DarkMode = styled(Switch)(({ theme }) => ({
     "& .MuiSwitch-switchBase.Mui-checked": {
       color: grey[600],
       "&:hover": {
@@ -43,11 +44,21 @@ function App() {
   return (
     <div
       className="App"
-      style={{ height: "100vh", backgroundColor: "#282534", color: "white" }}
+      style={{
+        height: "100vh",
+        backgroundColor: LightMode ? "#fff" : "#282534",
+        color: LightMode ? "black" : "white",
+        transition: "all 0.5s linear",
+      }}
     >
       <Container
         maxWidth="md"
-        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          justifyContent: "space-evenly",
+        }}
       >
         <div
           style={{
@@ -57,13 +68,20 @@ function App() {
             paddingTop: 10,
           }}
         >
-          theme
+          <span style={{ marginLeft: "80%" }}>
+            {LightMode ? "Light" : "Dark"} Mode
+          </span>
+          <DarkMode
+            checked={LightMode}
+            onChange={() => setLightMode(!LightMode)}
+          />
         </div>
         <Header
           category={category}
           setCategory={setCategory}
           word={word}
           setWord={setWord}
+          LightMode={LightMode}
         />
         {meanings && (
           <Definitions word={word} meanings={meanings} category={category} />
